@@ -38,7 +38,7 @@ class SellerProfile(models.Model):
 		db_table = "SellerProfile"
 
 
-class KeywordTable(models.Model):
+class Keyword(models.Model):
 	keyword_id = models.IntegerField(primary_key=True)
 	keyword_name = models.CharField(max_length=30)
 
@@ -55,7 +55,7 @@ class KeywordUser(models.Model):
 		db_table = "KeywordUser"
 
 
-class ProductTable(models.Model):
+class Product(models.Model):
 	product_id = models.AutoField(primary_key=True)
 	user_id = models.ForeignKey()
 	catagory_id = models.ForeignKey()
@@ -76,7 +76,7 @@ class ProductTable(models.Model):
 		db_table = "ProductTable"
 
 
-class CatagoryTable(models.Model):
+class Catagory(models.Model):
 	catagory_id = models.AutoField(primary_key=True)
 	catagory_name = models.CharField(max_length=30)
 	photo = models.FileField(upload_to="uploads/")
@@ -100,7 +100,7 @@ class DeliveryPartnerTable(models.Model):
 		db_table = "DeliveryPartnerTable"
 
 
-class OrderTable(models.Model):
+class Order(models.Model):
 	order_id = models.AutoField(primary_key=True)
 	date_of_order = models.AutoField()
 	product_id = models.ForeignKey()
@@ -139,7 +139,7 @@ class BuyerProfile(models.Model):
 		db_table = "BuyerProfile"
 
 
-class DeliveryPartnerOrderTable(models.Model):
+class DeliveryPartnerOrder(models.Model):
 	table_key = models.AutoField(primary_key=True)
 	order_id = models.ForeignKey()
 	user_id = models.ForeignKey()
@@ -151,7 +151,7 @@ class DeliveryPartnerOrderTable(models.Model):
 		db_table = "DeliveryPartnerOrderTable"
 
 
-class CountryTable(models.Model):
+class Country(models.Model):
 	country_key = models.AutoField(primary_key=True)
 	country_name = models.CharField(max_length=30)
 
@@ -159,13 +159,13 @@ class CountryTable(models.Model):
 		db_table = "CountryTable"
 
 
-class CityTable(models.Model):
+class City(models.Model):
 	city_key = models.AutoField(primary_key=True)
 	city_name = models.AutoField(primary_key=True)
 	country_key = models.ForeignKey()
 
 
-class TaxTable(models.Model):
+class Tax(models.Model):
 	tax_id = models.AutoField(primary_key=True)
 	tax_name = models.CharField(max_length=30)
 	tax_percentage = models.CharField(max_length=30)
@@ -178,13 +178,13 @@ class Notification(models.Model):
 	notification_message = models.CharField(max_length=50)
 
 
-class GroupTable(models.Model):
+class Group(models.Model):
 	group_id = models.AutoField(primary_key=True)
 	group_description = models.CharField(max_length=50)
 	date_of_addition = models.DateTimeField()
 
 
-class CommissionGroupTable(models.Model):
+class CommissionGroup(models.Model):
 	table_key = models.AutoField(primary_key=True)
 	group_id = models.ForeignKey()
 	catagory_id = models.IntegerField(unique=True)
@@ -193,7 +193,7 @@ class CommissionGroupTable(models.Model):
 	user_id = models.ForeignKey()
 
 
-class AuthTable(models.Model):
+class Auth(models.Model):
 	table_key = models.AutoField(primary_key=True)
 	user_id = models.ForeignKey()
 	super_admin = models.CharField()
