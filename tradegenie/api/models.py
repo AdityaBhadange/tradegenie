@@ -12,7 +12,7 @@ class User(models.Model):
 	group = models.ForeignKey(Group, on_delete=CASCADE)
 	date = models.DateTimeField(auto_now_add=True)
 
-	class __repr__(self):
+	def __repr__(self):
 		return self.business_name
 
 
