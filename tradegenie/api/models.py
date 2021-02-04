@@ -43,8 +43,8 @@ class Keyword(models.Model):
 
 class KeywordUser(models.Model):
 	mapping_id = models.AutoField(primary_key=True)
-	user = models.ForeignKey(primary_key=True)
-	keyword_id = models.ForeignKey(primary_key=True)
+	user = models.ForeignKey(User, on_delete=CASCADE)
+	keyword = models.ForeignKey(Keyword, on_delete=CASCADE)
 
 
 class Product(models.Model):
