@@ -1,6 +1,19 @@
 from django.db import models
 
 
+"""
+Author - Aditya Bhadange
+
+Few Notes:-
+	
+	1. Removed all the pk columns, bcs Django adds it for all the tables automatically.
+	2. For the ForiegnKey fields, I have changed the variable names (e.g. 'user_id' to 'user').
+	3. Added '__repr__' function wherever necessery for readability.
+	4. For phone numbers fields, I have used CharField.
+	5. For images, I have used ImageField instead of FileField, because it checks for image formats.
+"""
+
+
 class User(models.Model):
 	email = models.EmailField(max_length=254, unique=True)
 	mobile_number = models.CharField(max_length=20, unique=True)
@@ -48,7 +61,7 @@ class KeywordUser(models.Model):
 
 class Product(models.Model):
 	user = models.ForeignKey(User, on_delete=CASCADE)
-	catagory_id = models.ForeignKey()
+	catagory_id = models.ForeignKey(Catagory, on_delete=CASCADE)
 	description = models.CharField(max_length=100)
 	photos = models.ImageField(upload_to="images/")
 	gst = models.CharField(max_length=30)
