@@ -57,6 +57,7 @@ class Keyword(models.Model):
 class KeywordUser(models.Model):
 	user = models.ForeignKey('User', on_delete=models.CASCADE)
 	keyword = models.ForeignKey('Keyword', on_delete=models.CASCADE)
+	date = models.DateTimeField(auto_now_add=True)
 
 
 class Product(models.Model):
@@ -74,11 +75,13 @@ class Product(models.Model):
 	weight = models.DecimalField(max_digits=5, decimal_places=2)
 	delivery_partner_cost = models.DecimalField(max_digits=5, decimal_places=2)
 	product_cost = models.DecimalField(max_digits=5, decimal_places=2)
+	date = models.DateTimeField(auto_now_add=True)
 
 
 class Catagory(models.Model):
 	catagory_name = models.CharField(max_length=30)
 	photo = models.ImageField(upload_to="images/")
+	date = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
 		return self.catagory_name
@@ -88,11 +91,13 @@ class CategoryKeyword(models.Model):
 	keyword = models.ForeignKey('Keyword', on_delete=models.CASCADE)
 	catagory = models.ForeignKey('Catagory', on_delete=models.CASCADE)
 	commission = models.DecimalField(max_digits=5, decimal_places=2)
+	date = models.DateTimeField(auto_now_add=True)
 
 
 
 class DeliveryPartner(models.Model):
 	name = models.CharField(max_length=30)
+	date = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
 		return self.name
@@ -113,6 +118,7 @@ class Order(models.Model):
 	delivery_partner = models.ForeignKey('DeliveryPartner', on_delete=models.CASCADE)
 	shipment_date = models.DateTimeField(auto_now_add=True)
 	group = models.ForeignKey('Group', on_delete=models.CASCADE)
+	date = models.DateTimeField(auto_now_add=True)
 
 
 class BuyerProfile(models.Model):
@@ -127,6 +133,7 @@ class BuyerProfile(models.Model):
 	billing_address = models.CharField(max_length=50)
 	billing_pin_code = models.DecimalField(max_digits=5, decimal_places=2)
 	billing_whatsapp_number = models.CharField(max_length=20)
+	date = models.DateTimeField(auto_now_add=True)
 
 
 class DeliveryPartnerOrder(models.Model):
@@ -139,6 +146,7 @@ class DeliveryPartnerOrder(models.Model):
 
 class Country(models.Model):
 	country_name = models.CharField(max_length=20)
+	date = models.DateTimeField(auto_now_add=True)
 
 	def __repr__(self):
 		return self.country_name
@@ -147,17 +155,20 @@ class Country(models.Model):
 class City(models.Model):
 	city_name = models.CharField(max_length=20)
 	country_key = models.ForeignKey('Country', on_delete=models.CASCADE)
+	date = models.DateTimeField(auto_now_add=True)
 
 
 class Tax(models.Model):
 	tax_name = models.CharField(max_length=30)
 	tax_percentage = models.DecimalField(max_digits=5, decimal_places=2)
 	country = models.ForeignKey('Country', on_delete=models.CASCADE)
+	date = models.DateTimeField(auto_now_add=True)
 
 
 class Notification(models.Model):
 	user = models.ForeignKey('User', on_delete=models.CASCADE)
 	notification_message = models.CharField(max_length=50)
+	date = models.DateTimeField(auto_now_add=True)
 
 
 class Group(models.Model):
@@ -171,6 +182,7 @@ class CommissionGroup(models.Model):
 	company_commission = models.DecimalField(max_digits=5, decimal_places=2)
 	group_commission = models.DecimalField(max_digits=5, decimal_places=2)
 	user = models.ForeignKey('User', on_delete=models.CASCADE)
+	date = models.DateTimeField(auto_now_add=True)
 
 
 class Auth(models.Model):
@@ -181,3 +193,4 @@ class Auth(models.Model):
 	group = models.ForeignKey('Group', on_delete=models.CASCADE)
 	screen_id_1 = models.BooleanField(default=False)
 	screen_id_2 = models.BooleanField(default=False)
+	date = models.DateTimeField(auto_now_add=True)
