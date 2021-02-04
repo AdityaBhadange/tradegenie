@@ -42,13 +42,11 @@ class Keyword(models.Model):
 
 
 class KeywordUser(models.Model):
-	mapping_id = models.AutoField(primary_key=True)
 	user = models.ForeignKey(User, on_delete=CASCADE)
 	keyword = models.ForeignKey(Keyword, on_delete=CASCADE)
 
 
 class Product(models.Model):
-	product_id = models.AutoField(primary_key=True)
 	user = models.ForeignKey(User, on_delete=CASCADE)
 	catagory_id = models.ForeignKey()
 	description = models.CharField(max_length=100)
@@ -66,7 +64,6 @@ class Product(models.Model):
 
 
 class Catagory(models.Model):
-	catagory_id = models.AutoField(primary_key=True)
 	catagory_name = models.CharField(max_length=30)
 	photo = models.ImageField(upload_to="images/")
 
@@ -75,7 +72,6 @@ class Catagory(models.Model):
 
 
 class CategoryKeyword(models.Model):
-	table_primary_key = models.AutoField(primary_key=True)
 	keyword = models.ForeignKey(Keyword, on_delete=CASCADE)
 	catagory = models.ForeignKey(Catagory, on_delete=CASCADE)
 	commission = models.DecimalField(max_digits=5, decimal_places=2)
@@ -83,7 +79,6 @@ class CategoryKeyword(models.Model):
 
 
 class DeliveryPartner(models.Model):
-	delivery_partner_id = models.AutoField(primary_key=True)
 	name = models.CharField(max_length=30)
 
 	def __str__(self):
@@ -91,7 +86,6 @@ class DeliveryPartner(models.Model):
 
 
 class Order(models.Model):
-	order_id = models.AutoField(primary_key=True)
 	date_of_order = models.DateTimeField(auto_now_add=True)
 	product = models.ForeignKey(product, on_delete=CASCADE)
 	seller = models.ForeignKey(SellerProfile, on_delete=CASCADE)
@@ -109,7 +103,6 @@ class Order(models.Model):
 
 
 class BuyerProfile(models.Model):
-	buyer_id = models.AutoField(primary_key=True)
 	user = models.ForeignKey(User, on_delete=CASCADE)
 	delivery_name = models.CharField(max_length=30)
 	delivery_city = models.CharField(max_length=30)
@@ -124,7 +117,6 @@ class BuyerProfile(models.Model):
 
 
 class DeliveryPartnerOrder(models.Model):
-	table_key = models.AutoField(primary_key=True)
 	order = models.ForeignKey(Order, on_delete=CASCADE)
 	user = models.ForeignKey(User, on_delete=CASCADE)
 	delivery_status = models.CharField(max_length=10)
@@ -133,7 +125,6 @@ class DeliveryPartnerOrder(models.Model):
 
 
 class Country(models.Model):
-	country_key = models.AutoField(primary_key=True)
 	country_name = models.CharField(max_length=20)
 
 	def __repr__(self):
@@ -141,32 +132,27 @@ class Country(models.Model):
 
 
 class City(models.Model):
-	city_key = models.AutoField(primary_key=True)
 	city_name = models.CharField(max_length=20)
 	country_key = models.ForeignKey(Country, on_delete=CASCADE)
 
 
 class Tax(models.Model):
-	tax_id = models.AutoField(primary_key=True)
 	tax_name = models.CharField(max_length=30)
 	tax_percentage = models.DecimalField(max_digits=5, decimal_places=2)
-	tax_name = models.CharField(max_length=20)
+	country = models.ForeignKey(Country, on_delete=CASCADE)
 
 
 class Notification(models.Model):
-	notification_id = models.AutoField(primary_key=True)
 	user = models.ForeignKey(User, on_delete=CASCADE)
 	notification_message = models.CharField(max_length=50)
 
 
 class Group(models.Model):
-	group_id = models.AutoField(primary_key=True)
 	group_description = models.CharField(max_length=50)
 	date_of_addition = models.DateTimeField(auto_now_add=True)
 
 
 class CommissionGroup(models.Model):
-	table_key = models.AutoField(primary_key=True)
 	group = models.ForeignKey(Group, on_delete=CASCADE)
 	catagory = models.ForeignKey(Catagory, on_delete=CASCADE)
 	company_commission = models.DecimalField(max_digits=5, decimal_places=2)
@@ -175,7 +161,6 @@ class CommissionGroup(models.Model):
 
 
 class Auth(models.Model):
-	table_key = models.AutoField(primary_key=True)
 	user = models.ForeignKey(User, on_delete=CASCADE)
 	super_admin = models.CharField(max_length=10)
 	group_admin = models.CharField(max_length=10)
