@@ -61,8 +61,9 @@ class KeywordUser(models.Model):
 
 
 class Product(models.Model):
+	# Add name
 	user = models.ForeignKey('User', on_delete=models.CASCADE)
-	catagory_id = models.ForeignKey('Catagory', on_delete=models.CASCADE)
+	catagory = models.ForeignKey('Catagory', on_delete=models.CASCADE)
 	description = models.CharField(max_length=100)
 	photos = models.ImageField(upload_to="images/")
 	gst = models.CharField(max_length=30)
@@ -105,7 +106,7 @@ class DeliveryPartner(models.Model):
 
 class Order(models.Model):
 	date_of_order = models.DateTimeField(auto_now_add=True)
-	product = models.ForeignKey('product', on_delete=models.CASCADE)
+	product = models.ForeignKey('Product', on_delete=models.CASCADE)
 	seller = models.ForeignKey('SellerProfile', on_delete=models.CASCADE)
 	buyer = models.ForeignKey('BuyerProfile', on_delete=models.CASCADE)
 	quantity = models.DecimalField(max_digits=5, decimal_places=2)
@@ -118,7 +119,6 @@ class Order(models.Model):
 	delivery_partner = models.ForeignKey('DeliveryPartner', on_delete=models.CASCADE)
 	shipment_date = models.DateTimeField(auto_now_add=True)
 	group = models.ForeignKey('Group', on_delete=models.CASCADE)
-	date = models.DateTimeField(auto_now_add=True)
 
 
 class BuyerProfile(models.Model):
@@ -172,6 +172,7 @@ class Notification(models.Model):
 
 
 class Group(models.Model):
+	name = models.CharField(max_length=20)
 	group_description = models.CharField(max_length=50)
 	date_of_addition = models.DateTimeField(auto_now_add=True)
 
