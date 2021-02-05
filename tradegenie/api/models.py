@@ -6,7 +6,6 @@ Author - Aditya Bhadange
 
 Few Notes:-
 	
-	1. Removed all the pk columns, bcs Django adds it for all the tables automatically.
 	2. For the ForeignKey fields, I have changed the variable names (e.g. 'user_id' to 'user').
 	3. Added '__repr__' function wherever necessery for readability.
 	4. For phone numbers fields, I have used CharField.
@@ -14,12 +13,28 @@ Few Notes:-
 """
 
 """
-1. Add User id PK
-2. Add multiple PK in one table
-3. Create client table - id (ForiegnKey to all tables also)
-4. Change whatsapp_number to social_number variable name
-5. Create new Table - Productkeyword(user_id, keyword_id, product_id) (All are FK)
+###### CHANGES according to the meeting - 5 Feb 2021 ######
+**DON'T DELETE THIS COMMENTS**
+
+						*Changes*												*STATUS*
+
+1. Added pk for all tables - 												(STATUS - DONE)
+2. Add multiple PK in one table - 											(STATUS - Remaining)
+4. Change whatsapp_number to social_number variable name - 					(STATUS - DONE)
+5. Create new Table - Productkeyword(user_id, keyword_id, product_id)- 		(STATUS - DONE)
 """
+
+
+class Productkeyword(models.Model):
+	user = models.ForeignKey('User', on_delete=models.CASCADE)
+	keyword = models.ForeignKey('Keyword', on_delete=models.CASCADE)
+	product = models.ForeignKey('Product', on_delete=models.CASCADE)
+
+
+class Client(models.Model):
+	client_id = models.AutoField(primary_key=True)
+	date = models.DateTimeField(auto_now_add=True)
+
 
 class User(models.Model):
 	user_id = models.AutoField(primary_key=True)
@@ -31,6 +46,7 @@ class User(models.Model):
 	user_type = models.CharField(max_length=1)
 	social_number = models.CharField(max_length=20, unique=True)
 	group = models.ForeignKey('Group', on_delete=models.CASCADE)
+	client = models.ForeignKey('Client', on_delete=CASCADE)
 	date = models.DateTimeField(auto_now_add=True)
 
 	def __repr__(self):
@@ -38,54 +54,48 @@ class User(models.Model):
 
 
 class SellerProfile(models.Model):
-	# Add seller_id field manually
-	# Add business_name field
-	# Remove goole pay id
-	# Remove google pay number
 	seller_id = models.AutoField(primary_key=True)
 	user = models.ForeignKey('User', on_delete=models.CASCADE)
+	business_name = models.CharField(max_length=30, unique=True)
 	city = models.CharField(max_length=30)
 	address = models.CharField(max_length=50)
 	pin_code = models.CharField(max_length=10)
-	whatsapp_number = models.CharField(max_length=20, unique=True)
+	social_number = models.CharField(max_length=20, unique=True)
 	bank_name = models.CharField(max_length=30)
 	bank_city = models.CharField(max_length=30)
 	ifsc = models.CharField(max_length=10)
 	branch_name = models.CharField(max_length=30)
-	google_pay_id = models.CharField(max_length=30, unique=True)
 	upi_id = models.CharField(max_length=20, unique=True)
-	google_pay_number = models.CharField(max_length=20, unique=True)
 	country = models.ForeignKey('Country', on_delete=models.CASCADE)
 	group = models.ForeignKey('Group', on_delete=models.CASCADE)
+	client = models.ForeignKey('Client', on_delete=CASCADE)
 	date = models.DateTimeField(auto_now_add=True)
 
 
 class Keyword(models.Model):
-	# Add keywork_id PK
 	keywork_id = models.AutoField(primary_key=True)
 	keyword_name = models.CharField(max_length=30)
+	client = models.ForeignKey('Client', on_delete=CASCADE)
 
 	def __repr__(self):
 		return self.keyword_name
 
 
-# Change KeywordUser to UserInterest
-# Auto generated pk field will be ok for this Table
-class KeywordUser(models.Model):
+class UserInterest(models.Model):
 	user = models.ForeignKey('User', on_delete=models.CASCADE)
 	keyword = models.ForeignKey('Keyword', on_delete=models.CASCADE)
+	client = models.ForeignKey('Client', on_delete=CASCADE)
 	date = models.DateTimeField(auto_now_add=True)
 
 
 class Product(models.Model):
-	# Add product_id pk
-	# Add field for youtube_link
-	# Add product_name field
 	product_id = models.AutoField(primary_key=True)
 	user = models.ForeignKey('User', on_delete=models.CASCADE)
+	product_name = models.CharField(max_length=20)
 	catagory = models.ForeignKey('Catagory', on_delete=models.CASCADE)
 	description = models.CharField(max_length=100)
 	photos = models.ImageField(upload_to="images/")
+	youtube_link = models.URLField()
 	gst = models.CharField(max_length=30)
 	courier_self = models.CharField(max_length=30)
 	self_delivery_cost = models.DecimalField(max_digits=5, decimal_places=2)
@@ -96,13 +106,14 @@ class Product(models.Model):
 	weight = models.DecimalField(max_digits=5, decimal_places=2)
 	delivery_partner_cost = models.DecimalField(max_digits=5, decimal_places=2)
 	product_cost = models.DecimalField(max_digits=5, decimal_places=2)
+	client = models.ForeignKey('Client', on_delete=CASCADE)
 	date = models.DateTimeField(auto_now_add=True)
 
 
 class Catagory(models.Model):
-	# catagory_id auto will be ok for this Table
 	catagory_name = models.CharField(max_length=30)
 	photo = models.ImageField(upload_to="images/")
+	client = models.ForeignKey('Client', on_delete=CASCADE)
 	date = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
@@ -110,19 +121,18 @@ class Catagory(models.Model):
 
 
 class CategoryKeyword(models.Model):
-	# Remove keyword field
-	keyword = models.ForeignKey('Keyword', on_delete=models.CASCADE)
 	catagory = models.ForeignKey('Catagory', on_delete=models.CASCADE)
 	commission = models.DecimalField(max_digits=5, decimal_places=2)
+	client = models.ForeignKey('Client', on_delete=CASCADE)
 	date = models.DateTimeField(auto_now_add=True)
 
 
 
 class DeliveryPartner(models.Model):
-	# Add id pk
-	# Add address field
 	delivery_partner_id = models.AutoField(primary_key=True)
 	name = models.CharField(max_length=30)
+	address = models.Charfield(max_length=50)
+	client = models.ForeignKey('Client', on_delete=CASCADE)
 	date = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
@@ -130,7 +140,6 @@ class DeliveryPartner(models.Model):
 
 
 class Order(models.Model):
-	# Add order_id pk
 	order_id = models.AutoField(primary_key=True)
 	date_of_order = models.DateTimeField(auto_now_add=True)
 	product = models.ForeignKey('Product', on_delete=models.CASCADE)
@@ -142,40 +151,43 @@ class Order(models.Model):
 	delivery_cost = models.DecimalField(max_digits=5, decimal_places=2)
 	total_cost = models.DecimalField(max_digits=5, decimal_places=2)
 	status = models.CharField(max_length=10)
-	# tracking_id = models.IntegerField(unique=True) # How to create pk for this? ---> ANswer - Charfield only
+	tracking_id = models.Charfield(max_length=100)
 	delivery_partner = models.ForeignKey('DeliveryPartner', on_delete=models.CASCADE)
 	shipment_date = models.DateTimeField(auto_now_add=True)
+	client = models.ForeignKey('Client', on_delete=CASCADE)
 	group = models.ForeignKey('Group', on_delete=models.CASCADE)
 
 
 class BuyerProfile(models.Model):
-	# Add buyer_id pk
 	buyer_id = models.AutoField(primary_key=True)
 	user = models.ForeignKey('User', on_delete=models.CASCADE)
 	delivery_name = models.CharField(max_length=30)
 	delivery_city = models.CharField(max_length=30)
 	delivery_address = models.CharField(max_length=50)
 	delivery_pin_code = models.DecimalField(max_digits=5, decimal_places=2)
-	delivery_whatsapp_number = models.CharField(max_length=20)
+	delivery_social_number = models.CharField(max_length=20)
 	billing_name = models.CharField(max_length=30)
 	billing_city = models.CharField(max_length=30)
 	billing_address = models.CharField(max_length=50)
 	billing_pin_code = models.DecimalField(max_digits=5, decimal_places=2)
-	billing_whatsapp_number = models.CharField(max_length=20)
+	billing_social_number = models.CharField(max_length=20)
+	client = models.ForeignKey('Client', on_delete=CASCADE)
 	date = models.DateTimeField(auto_now_add=True)
 
 
 class DeliveryPartnerOrder(models.Model):
-	# pk auto will be ok.
 	order = models.ForeignKey('Order', on_delete=models.CASCADE)
 	user = models.ForeignKey('User', on_delete=models.CASCADE)
 	delivery_status = models.CharField(max_length=10)
-	# tracking_id = models.DecimalField(unique=True) # How to create an ID for this field?
+	tracking_id = models.CharField(max_length=100)
+	client = models.ForeignKey('Client', on_delete=CASCADE)
 	shipment_date = models.DateTimeField(auto_now_add=True)
 
 
 class Country(models.Model):
-	country_name = models.CharField(max_length=20) # This should be pk
+	country_id = models.AutoField(primary_key=True)
+	country_name = models.CharField(max_length=20)
+	client = models.ForeignKey('Client', on_delete=CASCADE)
 	date = models.DateTimeField(auto_now_add=True)
 
 	def __repr__(self):
@@ -184,51 +196,63 @@ class Country(models.Model):
 
 class City(models.Model):
 	# change country_key to country_name
+	city_id = models.AutoField(primary_key=True)
 	city_name = models.CharField(max_length=20)
-	country_key = models.ForeignKey('Country', on_delete=models.CASCADE)
+	country_name = models.ForeignKey('Country', on_delete=models.CASCADE)
+	client = models.ForeignKey('Client', on_delete=CASCADE)
 	date = models.DateTimeField(auto_now_add=True)
 
 
 class Tax(models.Model):
-	# pk auto will be ok.
-	# change country_key to country_name
 	tax_name = models.CharField(max_length=30)
 	tax_percentage = models.DecimalField(max_digits=5, decimal_places=2)
 	country = models.ForeignKey('Country', on_delete=models.CASCADE)
+	client = models.ForeignKey('Client', on_delete=CASCADE)
 	date = models.DateTimeField(auto_now_add=True)
 
 
 class Notification(models.Model):
 	user = models.ForeignKey('User', on_delete=models.CASCADE)
-	notification_message = models.CharField(max_length=50) # make max_length=100
+	notification_message = models.CharField(max_length=100)
+	client = models.ForeignKey('Client', on_delete=CASCADE)
 	date = models.DateTimeField(auto_now_add=True)
 
 
 class Group(models.Model):
-	# Add group_id pk
 	group_id = models.AutoField(primary_key=True)
 	group_name = models.CharField(max_length=20)
 	group_description = models.CharField(max_length=50)
-	date_of_addition = models.DateTimeField(auto_now_add=True) # Remove auto_add_now argument
+	client = models.ForeignKey('Client', on_delete=CASCADE)
+	date_of_addition = models.DateTimeField()
 
 
 class CommissionGroup(models.Model):
-	# user should be removed
 	group = models.ForeignKey('Group', on_delete=models.CASCADE)
 	catagory = models.ForeignKey('Catagory', on_delete=models.CASCADE)
 	company_commission = models.DecimalField(max_digits=5, decimal_places=2)
 	group_commission = models.DecimalField(max_digits=5, decimal_places=2)
-	user = models.ForeignKey('User', on_delete=models.CASCADE)
+	client = models.ForeignKey('Client', on_delete=CASCADE)
 	date = models.DateTimeField(auto_now_add=True)
 
 
 class Auth(models.Model):
 	auth_id = models.AutoField(primary_key=True)
 	user = models.ForeignKey('User', on_delete=models.CASCADE)
-	super_admin = models.CharField(max_length=10) # Change to signel character / Make this BooleanFild
-	group_admin = models.CharField(max_length=10) # Change to signel character / Make this BooleanFild
+	super_admin = models.BooleanField(default=False)
+	group_admin = models.BooleanField(default=False)
 	delivery_admin = models.CharField(max_length=10)
 	group = models.ForeignKey('Group', on_delete=models.CASCADE)
-	screen_id_1 = models.BooleanField(default=False) # Make variable accroding to all the pages
-	screen_id_2 = models.BooleanField(default=False)
+	page_adminpanel = models.BooleanField(default=False)
+	page_dashboard = models.BooleanField(default=False)
+	page_user = models.BooleanField(default=False)
+	page_order = models.BooleanField(default=False)
+	page_catagory = models.BooleanField(default=False)
+	page_product = models.BooleanField(default=False)
+	page_country = models.BooleanField(default=False)
+	page_tax = models.BooleanField(default=False)
+	page_commission = models.BooleanField(default=False)
+	page_groups = models.BooleanField(default=False)
+	page_payment = models.BooleanField(default=False)
+	page_keyword = models.BooleanField(default=False)
+	client = models.ForeignKey('Client', on_delete=CASCADE)
 	date = models.DateTimeField(auto_now_add=True)
