@@ -178,6 +178,7 @@ class Group(models.Model):
 
 
 class CommissionGroup(models.Model):
+	# user should be removed
 	group = models.ForeignKey('Group', on_delete=models.CASCADE)
 	catagory = models.ForeignKey('Catagory', on_delete=models.CASCADE)
 	company_commission = models.DecimalField(max_digits=5, decimal_places=2)

@@ -6,7 +6,7 @@ from rest_framework import mixins
 from rest_framework import generics
 
 
-class UserList(generics.ListCreateAPIViews):
+class UserList(generics.ListCreateAPIView):
 	queryset = User.objects.all()
 	serializer_class = UserSerializer
 
@@ -16,11 +16,11 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 	serializer_class = UserSerializer
 
 
-class GroupList(generics.ListCreateAPIViews):
+class GroupList(generics.ListCreateAPIView):
 	queryset = Group.objects.all()
 	serializer_class = GroupSerializer
 
 
-class GroupDetail(generics.RetrieveUpdateDestroyAPIViewd):
+class GroupDetail(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Group.objects.all()
 	serializer_class = GroupSerializer
