@@ -1,10 +1,10 @@
 from rest_framework import serializers
 from .models import (User, SellerProfile, Keyword, Product, 
-					Catagory, CategoryKeyword, DeliveryPartner, 
+					Catagory, CatagoryKeyword, DeliveryPartner, 
 					BuyerProfile, DeliveryPartnerOrder, Country, 
 					City, Tax, Notification, Group, 
 					CommissionGroup, Auth, Order, Client, 
-					ProductKeyword)
+					ProductKeyword, UserInterest)
 
 
 # User Serializer
@@ -18,6 +18,13 @@ class UserSerializer(serializers.ModelSerializer):
 class KeywordSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Keyword
+		fields = "__all__"
+
+
+# Country Serializer
+class CountrySerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Country
 		fields = "__all__"
 
 
@@ -57,9 +64,9 @@ class CatagorySerializer(serializers.ModelSerializer):
 
 
 # CategoryKeyword Serializer
-class CategoryKeywordSerializer(serializers.ModelSerializer):
+class CatagoryKeywordSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CategoryKeyword
+        model = CatagoryKeyword
         fields = "__all__"
 
 
@@ -117,3 +124,23 @@ class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification
         fields = '__all__'
+
+
+# UserInterest Serializer
+class UserInterestSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = UserInterest
+		fields = "__all__"
+
+
+# Auth Serializer
+class AuthSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Auth
+        fields="__all__"
+
+# Commission Serializer
+class CommissionGroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=CommissionGroup
+        fields="__all__"

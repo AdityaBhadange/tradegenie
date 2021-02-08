@@ -155,7 +155,7 @@ class Catagory(models.Model):
 		return self.catagory_name
 
 
-class CategoryKeyword(models.Model):
+class CatagoryKeyword(models.Model):
 	"""
 	This table is assigned to Sudarshan
 	"""

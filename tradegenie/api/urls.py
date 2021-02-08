@@ -23,6 +23,10 @@ urlpatterns = [
 	path("products/", views.ProductList.as_view()),
 	path("products/<int:pk>/", views.ProductDetail.as_view()),
 
+	# client url's
+	path('client/', views.ClientList.as_view()),
+	path('client/<int:pk>/', views.ClientDetail.as_view()),
+
 	# keyword url's
 	path("keywords/", views.KeywordList.as_view()),
 	path("keywords/<int:pk>/", views.KeywordDetail.as_view()),
@@ -32,8 +36,8 @@ urlpatterns = [
 	path("orders/<int:pk>/", views.OrderDetail.as_view()),
 
 	# deliver partner order url's
-	path("deliveryorders/", views.DeliveryPartnerList.as_view()),
-	path("deliveryorders/<int:pk>/", views.DeliveryPartnerDetail.as_view()),
+	path("deliveryorders/", views.DeliveryPartnerOrderList.as_view()),
+	path("deliveryorders/<int:pk>/", views.DeliveryPartnerOrderDetail.as_view()),
 
 	# BuyerProfile url's
     path("buyerprofile/", views.BuyerProfileList.as_view()),
@@ -68,8 +72,24 @@ urlpatterns = [
 	path('productkeyword/<int:pk>/', views.ProductKeywordDetail.as_view()),
 
 	# notification url
-	path('Notification/', views.NotificationList.as_view()),
-	path('Notification/<int:pk>/', views.NotificationDetail.as_view()),
+	path('notification/', views.NotificationList.as_view()),
+	path('notification/<int:pk>/', views.NotificationDetail.as_view()),
+
+	# userinterest url
+	path('userinterest/', views.UserInterestList.as_view()),
+	path('userinterest/<int:pk>/', views.UserInterestDetail.as_view()),
+
+	# auth url's
+    path('auth/', views.AuthList.as_view()),
+    path('auth/<int:pk>', views.AuthDetail.as_view()),
+
+    # groupcommission url's
+    path('groupcommission/', views.ComissionGroupList.as_view()),
+    path('groupcomission/<int:pk>', views.ComissionGroupDetail.as_view()),
+
+    # country url's
+    path('country/', views.CountryList.as_view()),
+    path('country/<int:pk>', views.CountryDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
