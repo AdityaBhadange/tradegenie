@@ -1,7 +1,9 @@
 from django.shortcuts import render
 # from rest_framework import viewsets
-from .models import User, Group, Catagory, DeliveryPartner, Product
-from .serializers import UserSerializer, GroupSerializer, CatagorySerializer, DeliveryPartnerSerializer, ProductSerializer
+from .models import User, Group, Catagory, DeliveryPartner, Product, Keyword, Order, DeliveryPartnerOrder
+from .serializers import (UserSerializer, GroupSerializer, CatagorySerializer, 
+						DeliveryPartnerSerializer, ProductSerializer,
+						KeywordSerializer, OrderSerializer, DeliveryPartnerOrderSerializer)
 from rest_framework import mixins
 from rest_framework import generics
 
@@ -59,3 +61,36 @@ class ProductList(generics.ListCreateAPIView):
 class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Product.objects.all()
 	serializer_class = ProductSerializer
+
+
+# Keyword view
+class KeywordList(generics.ListCreateAPIView):
+	queryset = Keyword.objects.all()
+	serializer_class = KeywordSerializer
+
+
+class KeywordDetail(generics.RetrieveUpdateDestroyAPIView):
+	queryset = Keyword.objects.all()
+	serializer_class = KeywordSerializer
+
+
+# Order view
+class OrderList(generics.ListCreateAPIView):
+	queryset = Order.objects.all()
+	serializer_class = OrderSerializer
+
+
+class OrderDetail(generics.RetrieveUpdateDestroyAPIView):
+	queryset = Order.objects.all()
+	serializer_class = OrderSerializer
+
+
+# DeliveryPartnerOrder view
+class DeliveryPartnerOrderList(generics.ListCreateAPIView):
+	queryset = DeliveryPartnerOrder.objects.all()
+	serializer_class = OrderSerializer
+
+
+class DeliveryPartnerOrderDetail(generics.RetrieveUpdateDestroyAPIView):
+	queryset = Order.objects.all()
+	serializer_class = DeliveryPartnerOrderSerializer
