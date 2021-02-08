@@ -3,13 +3,14 @@ from django.shortcuts import render
 from .models import (User, Group, Catagory, DeliveryPartner,
 					Product, Keyword, Order, DeliveryPartnerOrder,
 					SellerProfile, BuyerProfile, CategoryKeyword, City, Tax, 
-					ProductKeyword)
+					ProductKeyword, Notification)
 
 from .serializers import (UserSerializer, GroupSerializer, CatagorySerializer, 
 						DeliveryPartnerSerializer, ProductSerializer, KeywordSerializer, 
 						OrderSerializer, DeliveryPartnerOrderSerializer, SellerProfileSerializer,
 						BuyerProfileSerializer, CategoryKeywordSerializer, CitySerializer,
-						TaxSerializer, ProductkeywordSerializer, ProductKeywordSerializer)
+						TaxSerializer, ProductkeywordSerializer, ProductKeywordSerializer,
+						NotificationSerializer)
 
 from rest_framework import mixins
 from rest_framework import generics
@@ -176,3 +177,12 @@ class ClientList(generics.ListCreateAPIView):
 class ClientDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset =Client.objects.all()
     serializer_class = ClientSerializer
+
+# Notification view
+class NotificationList(generics.ListCreateAPIView):
+   queryset = Notification.objects.all()
+   serializer_class = NotificationSerializer
+
+class NotificationDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Notification.objects.all()
+    serializer_class = NotificationSerializer

@@ -66,6 +66,10 @@ urlpatterns = [
 	# product keyword url
 	path('productkeyword/', views.ProductkeywordtList.as_view()),
 	path('productkeyword/<int:pk>/', views.ProductKeywordDetail.as_view()),
+
+	# notification url
+	path('Notification/', views.NotificationList.as_view()),
+	path('Notification/<int:pk>/', views.NotificationDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

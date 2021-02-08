@@ -110,3 +110,10 @@ class ProductkeywordSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductKeyword
         fields = '__all__'
+
+
+# Notification Serializer
+class NotificationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notification
+        fields = '__all__'
