@@ -2,12 +2,12 @@ from django.shortcuts import render
 # from rest_framework import viewsets
 from .models import (User, Group, Catagory, DeliveryPartner,
 					Product, Keyword, Order, DeliveryPartnerOrder,
-					SellerProfile, BuyerProfile)
+					SellerProfile, BuyerProfile, CategoryKeyword)
 
 from .serializers import (UserSerializer, GroupSerializer, CatagorySerializer, 
 						DeliveryPartnerSerializer, ProductSerializer, KeywordSerializer, 
 						OrderSerializer, DeliveryPartnerOrderSerializer, SellerProfileSerializer,
-						BuyerProfileSerializer)
+						BuyerProfileSerializer, CategoryKeywordSerializer)
 
 from rest_framework import mixins
 from rest_framework import generics
@@ -33,17 +33,6 @@ class GroupList(generics.ListCreateAPIView):
 class GroupDetail(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Group.objects.all()
 	serializer_class = GroupSerializer
-
-
-# Catagory view
-class CatagoryList(generics.ListCreateAPIView):
-	queryset = Catagory.objects.all()
-	serializer_class = CatagorySerializer
-
-
-class CatagoryDetail(generics.RetrieveUpdateDestroyAPIView):
-	queryset = Catagory.objects.all()
-	serializer_class = CatagorySerializer
 
 
 # DeliveryPartner view
@@ -121,3 +110,25 @@ class SellerProfileList(generics.ListCreateAPIView):
 class SellerProfileDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = SellerProfile.objects.all()
     serializer_class = SellerProfileSerializer
+
+
+# Catagory view
+class CatagoryList(generics.ListCreateAPIView):
+	queryset = Catagory.objects.all()
+	serializer_class = CatagorySerializer
+
+
+class CatagoryDetail(generics.RetrieveUpdateDestroyAPIView):
+	queryset = Catagory.objects.all()
+	serializer_class = CatagorySerializer
+
+
+# CategoryKeyword view
+class CategoryKeywordList(generics.ListCreateAPIView):
+    queryset = CategoryKeyword.objects.all()
+    serializer_class = CategoryKeywordSerializer
+
+
+class CategoryKeywordDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = CategoryKeyword.objects.all()
+    serializer_class = CategoryKeywordSerializer

@@ -15,10 +15,6 @@ urlpatterns = [
 	path("groups/", views.GroupList.as_view()),
 	path("groups/<int:pk>/", views.GroupDetail.as_view()),
 
-	# catagory url's
-	path("catagory/", views.CatagoryList.as_view()),
-	path("catagory/<int:pk>/", views.CatagoryDetail.as_view()),
-
 	# deliverypartner url's
 	path("deliverypartners/", views.DeliveryPartnerList.as_view()),
 	path("deliverypartners/<int:pk>/", views.DeliveryPartnerDetail.as_view()),
@@ -46,6 +42,14 @@ urlpatterns = [
     # SellerProfile url's
     path("sellerprofile/", views.SellerProfileList.as_view()),
     path("sellerprofile/<int:pk>/", views.SellerProfileDetail.as_view()),
+
+    # catagory url's
+    path("catagory/", views.CatagoryList.as_view()),
+    path("catagory/<int:pk>/", views.CatagoryDetail.as_view()),
+
+    # CategoryKeyword url's
+    path("categorykeyword/", views.CategoryKeywordList.as_view()),
+    path("categorykeyword/<int:pk>/", views.CategoryKeywordDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
