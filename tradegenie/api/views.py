@@ -1,9 +1,14 @@
 from django.shortcuts import render
 # from rest_framework import viewsets
-from .models import User, Group, Catagory, DeliveryPartner, Product, Keyword, Order, DeliveryPartnerOrder
+from .models import (User, Group, Catagory, DeliveryPartner,
+					Product, Keyword, Order, DeliveryPartnerOrder,
+					SellerProfile, BuyerProfile)
+
 from .serializers import (UserSerializer, GroupSerializer, CatagorySerializer, 
-						DeliveryPartnerSerializer, ProductSerializer,
-						KeywordSerializer, OrderSerializer, DeliveryPartnerOrderSerializer)
+						DeliveryPartnerSerializer, ProductSerializer, KeywordSerializer, 
+						OrderSerializer, DeliveryPartnerOrderSerializer, SellerProfileSerializer,
+						BuyerProfileSerializer)
+
 from rest_framework import mixins
 from rest_framework import generics
 
@@ -88,9 +93,31 @@ class OrderDetail(generics.RetrieveUpdateDestroyAPIView):
 # DeliveryPartnerOrder view
 class DeliveryPartnerOrderList(generics.ListCreateAPIView):
 	queryset = DeliveryPartnerOrder.objects.all()
-	serializer_class = OrderSerializer
+	serializer_class = DeliveryPartnerOrderSerializer
 
 
 class DeliveryPartnerOrderDetail(generics.RetrieveUpdateDestroyAPIView):
-	queryset = Order.objects.all()
+	queryset = DeliveryPartnerOrder.objects.all()
 	serializer_class = DeliveryPartnerOrderSerializer
+
+
+# BuyerProfile view
+class BuyerProfileList(generics.ListCreateAPIView):
+    queryset = BuyerProfile.objects.all()
+    serializer_class = BuyerProfileSerializer
+
+
+class BuyerProfileDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = BuyerProfile.objects.all()
+    serializer_class = BuyerProfileSerializer
+
+
+# SellerProfile view
+class SellerProfileList(generics.ListCreateAPIView):
+    queryset = SellerProfile.objects.all()
+    serializer_class = SellerProfileSerializer
+
+
+class SellerProfileDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = SellerProfile.objects.all()
+    serializer_class = SellerProfileSerializer

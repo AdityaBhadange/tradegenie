@@ -38,6 +38,14 @@ urlpatterns = [
 	# deliver partner order url's
 	path("deliveryorders/", views.DeliveryPartnerList.as_view()),
 	path("deliveryorders/<int:pk>/", views.DeliveryPartnerDetail.as_view()),
+
+	# BuyerProfile url's
+    path("buyerprofile/", views.BuyerProfileList.as_view()),
+    path("buyerprofile/<int:pk>/", views.BuyerProfileDetail.as_view()),
+
+    # SellerProfile url's
+    path("sellerprofile/", views.SellerProfileList.as_view()),
+    path("sellerprofile/<int:pk>/", views.SellerProfileDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -60,3 +60,17 @@ class DeliveryPartnerOrderSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = DeliveryPartnerOrder
 		fields = "__all__"
+
+
+# BuyerProfile Serializer
+class BuyerProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BuyerProfile
+        fields = "__all__"
+
+
+# SellerProfile Serializer
+class SellerProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SellerProfile
+        fields = "__all__"
