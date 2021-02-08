@@ -58,6 +58,14 @@ urlpatterns = [
     # tax url
     path('tax/',views.TaxList.as_view()),
     path('tax/<int:pk>/',views.TaxDetail.as_view()),
+
+    # product url
+    path('product/', views.ProducttList.as_view()),
+	path('product/<int:pk>/', views.ProductDetail.as_view()),
+
+	# product keyword url
+	path('productkeyword/', views.ProductkeywordtList.as_view()),
+	path('productkeyword/<int:pk>/', views.ProductKeywordDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
