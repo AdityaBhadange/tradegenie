@@ -2,12 +2,13 @@ from django.shortcuts import render
 # from rest_framework import viewsets
 from .models import (User, Group, Catagory, DeliveryPartner,
 					Product, Keyword, Order, DeliveryPartnerOrder,
-					SellerProfile, BuyerProfile, CategoryKeyword)
+					SellerProfile, BuyerProfile, CategoryKeyword, City, Tax)
 
 from .serializers import (UserSerializer, GroupSerializer, CatagorySerializer, 
 						DeliveryPartnerSerializer, ProductSerializer, KeywordSerializer, 
 						OrderSerializer, DeliveryPartnerOrderSerializer, SellerProfileSerializer,
-						BuyerProfileSerializer, CategoryKeywordSerializer)
+						BuyerProfileSerializer, CategoryKeywordSerializer, CitySerializer,
+						TaxSerializer)
 
 from rest_framework import mixins
 from rest_framework import generics
@@ -132,3 +133,24 @@ class CategoryKeywordList(generics.ListCreateAPIView):
 class CategoryKeywordDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = CategoryKeyword.objects.all()
     serializer_class = CategoryKeywordSerializer
+
+
+# City view
+class CityList(generics.ListCreateAPIView):
+    queryset = City.objects.all()
+    serializer_class = CitySerializer
+
+
+class CityDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = City.objects.all()
+    serializer_class = CitySerializer
+
+
+# Tax view
+class TaxList(generics.ListCreateAPIView):
+   queryset = Tax.objects.all()
+   serializer_class = TaxSerializer
+
+class TaxDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Tax.objects.all()
+    serializer_class = TaxSerializer

@@ -81,3 +81,18 @@ class CategoryKeywordSerializer(serializers.ModelSerializer):
     class Meta:
         model = CategoryKeyword
         fields = "__all__"
+
+
+# City Serializer
+class CitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = City
+
+        fields = '__all__'
+
+
+# Tax Serialzier
+class TaxSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tax
+        fields = '__all__'

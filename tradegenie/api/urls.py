@@ -50,6 +50,14 @@ urlpatterns = [
     # CategoryKeyword url's
     path("categorykeyword/", views.CategoryKeywordList.as_view()),
     path("categorykeyword/<int:pk>/", views.CategoryKeywordDetail.as_view()),
+
+    # city url
+    path('city/',views.CityList.as_view()),
+    path('city/<int:pk>/',views.CityDetail.as_view()),
+
+    # tax url
+    path('tax/',views.TaxList.as_view()),
+    path('tax/<int:pk>/',views.TaxDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
