@@ -1,18 +1,18 @@
 from django.shortcuts import render
 # from rest_framework import viewsets
-from .models import (User, Group, Catagory, DeliveryPartner,
+from .models import (User, Group, Category, DeliveryPartner,
 					Product, Keyword, Order, DeliveryPartnerOrder,
-					SellerProfile, BuyerProfile, CatagoryKeyword, City, Tax, 
+					SellerProfile, BuyerProfile, CategoryKeyword, City, Tax, 
 					ProductKeyword, Notification, UserInterest, CommissionGroup,
-					Auth, Country)
+					Auth, Country, Client)
 
-from .serializers import (UserSerializer, GroupSerializer, CatagorySerializer, 
+from .serializers import (UserSerializer, GroupSerializer, CategorySerializer, 
 						DeliveryPartnerSerializer, ProductSerializer, KeywordSerializer, 
 						OrderSerializer, DeliveryPartnerOrderSerializer, SellerProfileSerializer,
-						BuyerProfileSerializer, CatagoryKeywordSerializer, CitySerializer,
-						TaxSerializer, ProductkeywordSerializer, NotificationSerializer,
-						UserInterestSerializer, AuthSerializer, CommissionGroupSerializer,
-						CountrySerializer)
+						BuyerProfileSerializer, CategoryKeywordSerializer, CitySerializer,
+						TaxSerializer, NotificationSerializer, UserInterestSerializer, 
+                        AuthSerializer, CommissionGroupSerializer, CountrySerializer, 
+                        ProductKeywordSerializer, ClientSerializer)
 
 from rest_framework import mixins
 from rest_framework import generics
@@ -117,26 +117,26 @@ class SellerProfileDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = SellerProfileSerializer
 
 
-# Catagory view
-class CatagoryList(generics.ListCreateAPIView):
-	queryset = Catagory.objects.all()
-	serializer_class = CatagorySerializer
+# Category view
+class CategoryList(generics.ListCreateAPIView):
+	queryset = Category.objects.all()
+	serializer_class = CategorySerializer
 
 
-class CatagoryDetail(generics.RetrieveUpdateDestroyAPIView):
-	queryset = Catagory.objects.all()
-	serializer_class = CatagorySerializer
+class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+	queryset = Category.objects.all()
+	serializer_class = CategorySerializer
 
 
-# CatagoryKeyword view
-class CatagoryKeywordList(generics.ListCreateAPIView):
-    queryset = CatagoryKeyword.objects.all()
-    serializer_class = CatagoryKeywordSerializer
+# CategoryKeyword view
+class CategoryKeywordList(generics.ListCreateAPIView):
+    queryset = CategoryKeyword.objects.all()
+    serializer_class = CategoryKeywordSerializer
 
 
-class CatagoryKeywordDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = CatagoryKeyword.objects.all()
-    serializer_class = CatagoryKeywordSerializer
+class CategoryKeywordDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = CategoryKeyword.objects.all()
+    serializer_class = CategoryKeywordSerializer
 
 
 # City view
@@ -161,12 +161,12 @@ class TaxDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 # ProductKeyword view
-class ProductkeywordtList(generics.ListCreateAPIView):
+class ProductKeywordtList(generics.ListCreateAPIView):
     queryset = ProductKeyword.objects.all()
-    serializer_class = ProductkeywordSerializer
+    serializer_class = ProductKeywordSerializer
 
 
-class ProductkeywordDetail(generics.RetrieveUpdateDestroyAPIView):
+class ProductKeywordDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = ProductKeyword.objects.all()
     serializer_class = ProductKeywordSerializer
 

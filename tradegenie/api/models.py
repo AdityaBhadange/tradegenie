@@ -124,7 +124,7 @@ class Product(models.Model):
 	product_id = models.AutoField(primary_key=True)
 	user = models.ForeignKey('User', on_delete=models.CASCADE)
 	product_name = models.CharField(max_length=20)
-	catagory = models.ForeignKey('Catagory', on_delete=models.CASCADE)
+	Category = models.ForeignKey('Category', on_delete=models.CASCADE)
 	description = models.CharField(max_length=100)
 	photos = models.ImageField(upload_to="images/")
 	youtube_link = models.URLField()
@@ -142,24 +142,24 @@ class Product(models.Model):
 	date = models.DateTimeField(auto_now_add=True)
 
 
-class Catagory(models.Model):
+class Category(models.Model):
 	"""
 	This table is assigned to Sudarshan
 	"""
-	catagory_name = models.CharField(max_length=30)
+	Category_name = models.CharField(max_length=30)
 	photo = models.ImageField(upload_to="images/")
 	client = models.ForeignKey('Client', on_delete=models.CASCADE)
 	date = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
-		return self.catagory_name
+		return self.Category_name
 
 
-class CatagoryKeyword(models.Model):
+class CategoryKeyword(models.Model):
 	"""
 	This table is assigned to Sudarshan
 	"""
-	catagory = models.ForeignKey('Catagory', on_delete=models.CASCADE)
+	Category = models.ForeignKey('Category', on_delete=models.CASCADE)
 	commission = models.DecimalField(max_digits=5, decimal_places=2)
 	client = models.ForeignKey('Client', on_delete=models.CASCADE)
 	date = models.DateTimeField(auto_now_add=True)
@@ -290,7 +290,7 @@ class CommissionGroup(models.Model):
 	This table is assigned to Nilesh
 	"""
 	group = models.ForeignKey('Group', on_delete=models.CASCADE)
-	catagory = models.ForeignKey('Catagory', on_delete=models.CASCADE)
+	Category = models.ForeignKey('Category', on_delete=models.CASCADE)
 	company_commission = models.DecimalField(max_digits=5, decimal_places=2)
 	group_commission = models.DecimalField(max_digits=5, decimal_places=2)
 	client = models.ForeignKey('Client', on_delete=models.CASCADE)
@@ -311,7 +311,7 @@ class Auth(models.Model):
 	page_dashboard = models.BooleanField(default=False)
 	page_user = models.BooleanField(default=False)
 	page_order = models.BooleanField(default=False)
-	page_catagory = models.BooleanField(default=False)
+	page_Category = models.BooleanField(default=False)
 	page_product = models.BooleanField(default=False)
 	page_country = models.BooleanField(default=False)
 	page_tax = models.BooleanField(default=False)

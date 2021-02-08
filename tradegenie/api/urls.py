@@ -47,9 +47,9 @@ urlpatterns = [
     path("sellerprofile/", views.SellerProfileList.as_view()),
     path("sellerprofile/<int:pk>/", views.SellerProfileDetail.as_view()),
 
-    # catagory url's
-    path("catagory/", views.CatagoryList.as_view()),
-    path("catagory/<int:pk>/", views.CatagoryDetail.as_view()),
+    # category url's
+    path("category/", views.CategoryList.as_view()),
+    path("category/<int:pk>/", views.CategoryDetail.as_view()),
 
     # CategoryKeyword url's
     path("categorykeyword/", views.CategoryKeywordList.as_view()),
@@ -64,11 +64,11 @@ urlpatterns = [
     path('tax/<int:pk>/',views.TaxDetail.as_view()),
 
     # product url
-    path('product/', views.ProducttList.as_view()),
+    path('product/', views.ProductList.as_view()),
 	path('product/<int:pk>/', views.ProductDetail.as_view()),
 
 	# product keyword url
-	path('productkeyword/', views.ProductkeywordtList.as_view()),
+	path('productkeyword/', views.ProductKeywordtList.as_view()),
 	path('productkeyword/<int:pk>/', views.ProductKeywordDetail.as_view()),
 
 	# notification url
@@ -84,8 +84,8 @@ urlpatterns = [
     path('auth/<int:pk>', views.AuthDetail.as_view()),
 
     # groupcommission url's
-    path('groupcommission/', views.ComissionGroupList.as_view()),
-    path('groupcomission/<int:pk>', views.ComissionGroupDetail.as_view()),
+    path('commissiongroup/', views.ComissionGroupList.as_view()),
+    path('commissiongroup/<int:pk>', views.ComissionGroupDetail.as_view()),
 
     # country url's
     path('country/', views.CountryList.as_view()),

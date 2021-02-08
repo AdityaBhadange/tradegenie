@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import (User, SellerProfile, Keyword, Product, 
-					Catagory, CatagoryKeyword, DeliveryPartner, 
+					Category, CategoryKeyword, DeliveryPartner, 
 					BuyerProfile, DeliveryPartnerOrder, Country, 
 					City, Tax, Notification, Group, 
 					CommissionGroup, Auth, Order, Client, 
@@ -56,17 +56,17 @@ class SellerProfileSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-# Catagory Serializer
-class CatagorySerializer(serializers.ModelSerializer):
+# Category Serializer
+class CategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Catagory
+        model = Category
         fields = "__all__"
 
 
 # CategoryKeyword Serializer
-class CatagoryKeywordSerializer(serializers.ModelSerializer):
+class CategoryKeywordSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CatagoryKeyword
+        model = CategoryKeyword
         fields = "__all__"
 
 
@@ -113,7 +113,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 # ProductKeyword Serializer
-class ProductkeywordSerializer(serializers.ModelSerializer):
+class ProductKeywordSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductKeyword
         fields = '__all__'
